@@ -1,7 +1,7 @@
 package main
 
 import (
-	pb "github.com/hohaichp/shippy/consignment-service/proto/consignment"
+	pb "github.com/hohaichp/myshippy/consignment-service/proto/consignment"
 	"context"
 	"log"
 	"github.com/micro/go-micro/v2"

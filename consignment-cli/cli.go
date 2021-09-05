@@ -7,7 +7,7 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
-	pb "github.com/hohaichp/shippy/consignment-cli/proto/consignment"
+	pb "github.com/hohaichp/myshippy/consignment-cli/proto/consignment"
 
 	"github.com/micro/go-micro/v2"
 )

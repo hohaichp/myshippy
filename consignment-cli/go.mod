@@ -1,4 +1,4 @@
-module github.com/hohaichp/shippy/consignment-cli
+module github.com/hohaichp/myshippy/consignment-cli
 
 go 1.16
 

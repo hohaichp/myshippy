@@ -1,4 +1,4 @@
-module github.com/hohaichp/shippy/consignment-service
+module github.com/hohaichp/myshippy/consignment-service
 
 go 1.16
 
