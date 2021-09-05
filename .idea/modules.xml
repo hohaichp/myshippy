@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/consignment-cli/consignment-cli.iml" filepath="$PROJECT_DIR$/consignment-cli/consignment-cli.iml" />
+      <module fileurl="file://$PROJECT_DIR$/consignment-service/consignment-service.iml" filepath="$PROJECT_DIR$/consignment-service/consignment-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/shippy.iml" filepath="$PROJECT_DIR$/shippy.iml" />
+    </modules>
+  </component>
+</project>
