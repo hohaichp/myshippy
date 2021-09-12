@@ -9,7 +9,7 @@ import (
 	"os"
 	pb "github.com/hohaichp/myshippy/consignment-cli/proto/consignment"
 
-	"github.com/micro/go-micro/v2"
+	"github.com/asim/go-micro/v3"
 )
 
 const (
@@ -34,7 +34,7 @@ func main() {
 	service := micro.NewService(micro.Name("shippy.cli.consignment"))
 	service.Init()
 
-	client := pb.NewShippingServiceClient("shippy.service.consignment", service.Client())
+	client := pb.NewShippingService("shippy.service.consignment", service.Client())
 
 	// Contact the server and print out its response.
 	file := defaultFilename

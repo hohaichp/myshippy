@@ -5,7 +5,7 @@ import (
 	vesselPb "github.com/hohaichp/myshippy/consignment-service/proto/vessel"
 	"context"
 	"log"
-	"github.com/micro/go-micro/v2"
+	"github.com/asim/go-micro/v3"
 )
 
 var count int
@@ -40,7 +40,7 @@ func (repo *Repository) GetAll() []*pb.Consignment {
 type service struct {
 	repo Repository
 	// consignment-service 作为客户端调用 vessel-service 的函数
-	vesselClient vesselPb.VesselServiceClient
+	vesselClient vesselPb.VesselService
 }
 
 //
@@ -95,7 +95,7 @@ func main() {
 	repo := Repository{}
 
 	// 作为 vessel-service 的客户端
-	vClient := vesselPb.NewVesselServiceClient("shippy.service.vessel", server.Client())
+	vClient := vesselPb.NewVesselService("shippy.service.vessel", server.Client())
 
 	pb.RegisterShippingServiceHandler(server.Server(), &service{repo, vClient})
 

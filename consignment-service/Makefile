@@ -1,6 +1,9 @@
 build:
 	# 不再使用 grpc 插件
 	protoc -I. --go_out=plugins=micro:D:/workspaces/goproject/shippy/consignment-service proto/consignment/consignment.proto
+    # v3版本
+	#protoc --proto_path=$GOPATH/src:. --micro_out=. --go_out=. greeter.proto
+	protoc --proto_path=./proto/consignment/ --micro_out=D:/workspaces/goproject/shippy/consignment-service --go_out=D:/workspaces/goproject/shippy/consignment-service consignment.proto
 
     # 告知 Go 编译器生成二进制文件的目标环境：amd64 CPU 的 Linux 系统, 以下是windows版本
     # SET CGO_ENABLED=0

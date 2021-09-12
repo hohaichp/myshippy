@@ -1,6 +1,9 @@
 build:
-	# 不再使用 grpc 插件
+	# 不再使用 grpc 插件 v2版本
 	protoc -I. --go_out=plugins=micro:D:/workspaces/goproject/shippy/vessel-service proto/vessel/vessel.proto
+    # v3版本
+	#protoc --proto_path=$GOPATH/src:. --micro_out=. --go_out=. greeter.proto
+	protoc --proto_path=./proto/vessel/ --micro_out=D:/workspaces/goproject/shippy/vessel-service --go_out=D:/workspaces/goproject/shippy/vessel-service vessel.proto
 
     # 告知 Go 编译器生成二进制文件的目标环境：amd64 CPU 的 Linux 系统, 以下是windows版本
     # SET CGO_ENABLED=0

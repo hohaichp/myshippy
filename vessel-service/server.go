@@ -5,7 +5,7 @@ import (
 	"context"
 	"log"
 	"github.com/pkg/errors"
-	"github.com/micro/go-micro/v2"
+	"github.com/asim/go-micro/v3"
 )
 
 var count int
@@ -49,6 +49,7 @@ func (s *service) FindAvailable(ctx context.Context, spec *pb.Specification, res
 }
 
 func main() {
+
 	// 停留在港口的货船，先写死
 	vessels := []*pb.Vessel{
 		{Id: "vessel001", Name: "Boaty McBoatface", MaxWeight: 200000, Capacity: 500},
