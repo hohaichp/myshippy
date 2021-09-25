@@ -6,6 +6,8 @@ import (
 	"log"
 	"github.com/pkg/errors"
 	"github.com/asim/go-micro/v3"
+	"github.com/asim/go-micro/plugins/registry/consul/v3"
+	"github.com/asim/go-micro/v3/registry"
 )
 
 var count int
@@ -50,14 +52,23 @@ func (s *service) FindAvailable(ctx context.Context, spec *pb.Specification, res
 
 func main() {
 
+	// Register consul
+	reg := consul.NewRegistry(func(options *registry.Options) {
+		// options.Addrs = []string {"127.0.0.1:8500"}
+		options.Addrs = []string {"host.docker.internal:8500"}
+	})
+
 	// 停留在港口的货船，先写死
 	vessels := []*pb.Vessel{
 		{Id: "vessel001", Name: "Boaty McBoatface", MaxWeight: 200000, Capacity: 500},
 	}
 	repo := &VesselRepository{vessels}
+
+	// Create service
 	server := micro.NewService(
 		micro.Name("shippy.service.vessel"),
 		micro.Version("latest"),
+		micro.Registry(reg),
 	)
 	server.Init()
 

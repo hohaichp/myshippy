@@ -1,15 +1,17 @@
 package main
 
 import (
+	pb "github.com/hohaichp/myshippy/consignment-cli/proto/consignment"
 	"context"
 	"encoding/json"
 	"errors"
 	"io/ioutil"
 	"log"
 	"os"
-	pb "github.com/hohaichp/myshippy/consignment-cli/proto/consignment"
 
 	"github.com/asim/go-micro/v3"
+	"github.com/asim/go-micro/plugins/registry/consul/v3"
+	"github.com/asim/go-micro/v3/registry"
 )
 
 const (
@@ -31,10 +33,23 @@ func parseFile(file string) (*pb.Consignment, error) {
 
 func main() {
 
-	service := micro.NewService(micro.Name("shippy.cli.consignment"))
-	service.Init()
+	// Register consul
+	reg := consul.NewRegistry(func(options *registry.Options) {
+		// options.Addrs = []string {"127.0.0.1:8500"}
+		options.Addrs = []string {"host.docker.internal:8500"}
+	})
 
-	client := pb.NewShippingService("shippy.service.consignment", service.Client())
+	// Create service
+	server := micro.NewService(
+		// 必须和 consignment.proto 中的 package 一致
+		micro.Name("shippy.cli.consignment"),
+		micro.Version("latest"),
+		micro.Registry(reg),
+	)
+	// 解析命令行参数
+	server.Init()
+
+	client := pb.NewShippingService("shippy.service.consignment", server.Client())
 
 	// Contact the server and print out its response.
 	file := defaultFilename

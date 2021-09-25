@@ -6,6 +6,8 @@ import (
 	"context"
 	"log"
 	"github.com/asim/go-micro/v3"
+	"github.com/asim/go-micro/plugins/registry/consul/v3"
+	"github.com/asim/go-micro/v3/registry"
 )
 
 var count int
@@ -85,10 +87,18 @@ func (s *service) GetConsignments(ctx context.Context, req *pb.GetRequest, resp 
 }
 
 func main() {
+	// Register consul
+	reg := consul.NewRegistry(func(options *registry.Options) {
+		// options.Addrs = []string {"127.0.0.1:8500"}
+		options.Addrs = []string {"host.docker.internal:8500"}
+	})
+
+	// Create service
 	server := micro.NewService(
 		// 必须和 consignment.proto 中的 package 一致
 		micro.Name("shippy.service.consignment"),
 		micro.Version("latest"),
+		micro.Registry(reg),
 		)
 	// 解析命令行参数
     server.Init()
